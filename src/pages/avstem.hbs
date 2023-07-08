@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avstemninger</title>
+  <script src="/toAll.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('navDiv').innerHTML = nav();
+      username();
+      admin();
+      unread();
+    });
+  </script>
+  <link rel="stylesheet" href="/myStyle.css" />
+  <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404">
+</head>
+<body>
+  <div id="navDiv"></div>
+  <div style="text-align:center;">
+    <h1 style="margin-bottom:0px;color:darkgreen;">SI DIN MENING</h1>
+    <label style="font-size:smaller;">(kun én stemme per bruker per avstemning)</label>
+  </div>
+    
+  <div id="fotballDiv">
+    <form action="/vote" method="post">
+    <table class="voteTable">
+      <tr style="text-align:center;">
+        <th style="text-align:left;"><h2 class="avstem">Fotball GOAT</h2></th>
+        <th style="vertical-align:bottom;">Maradona</th>
+        <th style="vertical-align:bottom;">Pele</th>
+        <th style="vertical-align:bottom;">Messi</th>
+      </tr>
+      <tr>
+        <td style="font-size:larger;padding-right:35px;">Hvem er tidenes største mannlige fotballspiller?<br>
+            <label style="font-size:small">(kvinnelige avgjort - Martha)</label>
+        </td>
+        <td class="avstemTd">
+          <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Maradona3.jfif?1684600769535" class="voteImg" alt="Maradona">
+        </td>
+        <td class="avstemTd">
+          <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Pele3.jfif?1684600830665" class="voteImg" alt="Pele">
+        </td>
+        <td class="avstemTd">
+          <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Messi3.jfif?1684600779289" class="voteImg" alt="Messi">
+        </td>
+        <td><a href="?standing=football" class="visStillingA">Vis meg stillingen!</a></td>
+      </tr>
+      {{#if fotball}}
+        <tr style="text-align:center;font-size:x-small;">
+          <td></td>
+          <td>Maradona er Gud!<input type="radio" value="Maradona" name="fotball"  checked></td>
+          <td>Pele, selvfølgelig!<input type="radio" value="Pele" name="fotball"></td>
+          <td>Messi ruler!<input type="radio" value="Messi" name="fotball"></td>
+          <td><input type="submit" value="Avgi stemme" class="avgiStemme"></td>
+        </tr>
+      {{else}}
+        <tr style="text-align:center;font-size:x-small; color:goldenrod; font-weight:bold;">
+          <td></td>
+          <td>{{Maradona}}</td>
+          <td>{{Pele}}</td>
+          <td>{{Messi}}</td>
+        </tr>
+      {{/if}}
+    </table>
+    </form>
+  </div>
+    
+  <div id="tennisDiv">
+    <form action="/vote" method="post">
+    <table class="voteTable">
+      <tr style="text-align:center;">
+        <th style="text-align:left;"><h2 class="avstem">Tennis GOAT</h2></th>
+        <th style="vertical-align:bottom;">Federer</th>
+        <th style="vertical-align:bottom;">Nadal</th>
+        <th style="vertical-align:bottom;">Djokovic</th>
+      </tr>
+      <tr>
+        <td style="font-size:larger;padding-right:35px;">Hvem er tidenes største mannlige tennisspiller?<br>
+            <label style="font-size:small">(kvinnelige avgjort - Venus Williams)</label>
+        </td>
+        <td class="avstemTd">
+          <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Federer.jfif?1684605056953" class="voteImg" alt="Federer">
+        </td>
+        <td class="avstemTd">
+          <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Nadal.jfif?1684605066269" class="voteImg" alt="Nadal">
+        </td>
+        <td class="avstemTd">
+          <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Djokovic.jfif?1684605073662" class="voteImg" alt="Djokovic">
+        </td>
+        <td><a href="?standing=tennis" class="visStillingA">Vis meg stillingen!</a></td>
+      </tr>
+      {{#if tennis}}
+        <tr style="text-align:center;font-size:x-small;">
+          <td></td>
+          <td>The Swiss Maestro!<input type="radio" value="Federer" name="tennis"  checked></td>
+          <td>The King of Clay!<input type="radio" value="Nadal" name="tennis"></td>
+          <td>Nole for some reason<input type="radio" value="Djokovic" name="tennis"></td>
+          <td><input type="submit" value="Avgi stemme" class="avgiStemme"></td>
+        </tr>
+      {{else}}
+        <tr style="text-align:center;font-size:x-small; color:goldenrod; font-weight:bold;">
+          <td></td>
+          <td>{{Federer}}</td>
+          <td>{{Nadal}}</td>
+          <td>{{Djokovic}}</td>
+        </tr>
+      {{/if}}
+    </table>
+    </form>
+  </div>
+  
+  <div id="assholeDiv">
+    <form action="/vote" method="post">
+    <table class="voteTable">
+      <tr style="text-align:center;">
+        <th style="text-align:left;"><h2 class="avstem">Asshole Of The Year Show</h2></th>
+        <th style="vertical-align:bottom;">Piers Morgan</th>
+        <th style="vertical-align:bottom;">Ronaldo <label style="font-weight:normal">(kopien)</label></th>
+        <th style="vertical-align:bottom;">Vladimir Putin</th>
+      </tr>
+      <tr>
+        <td style="font-size:small;padding-right:0px;">Her var det noen kandidater som dessverre ikke kunne nå vår shortlist:<br>
+          <li style="font-size:x-small;">DJT: Du kan ikke vinne hver gang, men et STORT rasshull er  du!</li>
+          <li style="font-size:x-small;">RTE, Tyrkias eget skinnende brune, vi har ikke glemt deg!</li>  
+          <li style="font-size:x-small;">Victor Urban: Som DJT/RTE domineres du av vår kandidat 3 i kategori/politikk</li>
+          <li style="font-size:x-small;">Marjorie Taylor Greene: Vi trenger kvinnelige kandidater, så stå på!</li>
+        </td>
+        <td class="avstemTd">
+          <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/PiersMorgan.jfif?1684607972303" class="voteImg" alt="Piers Morgan">
+        </td>
+        <td class="avstemTd">
+          <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Ronaldo.jfif?1684607984585" class="voteImg" alt="Ronaldo">
+        </td>
+        <td class="avstemTd">
+          <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/VladimirPutin.jfif?1684607994398" class="voteImg" alt="Vladimir Putin">
+        </td>
+        <td><a href="?standing=asshole" class="visStillingA">Vis meg stillingen!</a></td>
+      </tr>  
+      {{#if asshole}}
+        <tr style="text-align:center;font-size:x-small;">
+          <td></td>
+          <td style="font-size:xx-small;">An asshole through and through!<input type="radio" value="Morgan" name="asshole"></td>
+          <td>Hvilken sutrekopp!<input type="radio" value="Ronaldo" name="asshole"></td>
+          <td>Veldig ond, men ikke geni!<input type="radio" value="Putin" name="asshole" checked></td>
+          <td><input type="submit" value="Avgi stemme" class="avgiStemme"></td>
+        </tr>
+      {{else}}
+      <tr style="text-align:center;font-size:x-small; color:goldenrod; font-weight:bold;">
+          <td></td>
+          <td>{{Morgan}}</td>
+          <td>{{Ronaldo}}</td>
+          <td>{{Putin}}</td>
+        </tr>
+      {{/if}}
+    </table>    
+    </form>
+  </div>
+  
+  <div id="hiddenMsgCount">{{countMsg}}</div>
+  <div id="hiddenUsername" style="display:none;">{{username}}</div>
+  <div id="hiddenAdm" style="display:none;">{{admin}}</div> 
+</body>
+</html>

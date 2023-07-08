@@ -1,0 +1,63 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS50 Web</title>
+    <script src="/toAll.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('navDiv').innerHTML = nav(); username(); admin(); unread();
+      });
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404"
+    />
+
+  </head>
+  <body style="background-color:#f9ecf2">
+    <div id="navDiv"></div>
+
+    <div style="text-align:center; margin:auto; width:70%; background-color:white; min-height:650px;border-radius:5px;border: 1px solid grey;margin-top:20px;">
+      <h1 class="utheving">CS50's Web Programming with Python and JavaScript</h1>
+      <div style="text-align:left; padding-left:50px;font-size:larger;">
+        <ul id="cs50Ul">
+          <li>Online kurs i regi av <b class="utheving">Harvard University</b> 
+            <a href="https://pll.harvard.edu/course/cs50s-web-programming-python-and-javascript?delta=1">CS50 Web</a> 
+            <label style="font-size:smaller;">med</label>
+            <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/djangoLogo1.png?v=1684910855139" height="18px" style="position:relative;top:2px;">
+          </li>
+          <li>Alle oppgavene må dokumenteres med youtube-video</li>
+          <li class="secondLi">...igjen: Stålsett deg, for dette blir KLEINT!</li>
+          <li>Den mest interessante videoen er den siste (øverste), <b class="utheving">"Capstone Stock Trader":</b></li>
+          <li class="secondLi">I kursets siste oppgave står man helt fritt til å definere oppgaven selv, og dette er mitt svar</li>
+        </ul>
+      </div>
+      <div style="text-align:left; padding-left:90px; padding-bottom:15px; display:inline-block; width:55%; float:left;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/vwUmmZ78FvY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      
+      <div style="text-align:left; padding-left:50px;font-size:larger; display:inline-block; width:25%;">
+        <label><b style="color:darkblue;">Alle prosjektene:</b></label>
+        <ul>
+          <li><a href="https://youtu.be/vwUmmZ78FvY">Stock Trader</a></li>
+          <li><a href="https://youtu.be/0Kzaa_IAJsY">Social Network</a></li>
+          <li><a href="https://youtu.be/5CdBaQ1wIMs">Mail</a></li>
+          <li><a href="https://youtu.be/n8lRdwrGqGs">Commerce</a></li>
+          <li><a href="https://youtu.be/1Ur9ZgLNpx4">Wiki</a></li>
+          <li><a href="https://youtu.be/_vD5s4uxbi0">Search</a></li>  
+        </ul>  
+        
+      </div>
+      
+      
+    </div>
+
+    <div id="hiddenMsgCount">{{countMsg}}</div>    
+    <div id="hiddenUsername" style="display:none;">{{username}}</div>
+    <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+  </body>
+</html>

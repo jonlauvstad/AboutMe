@@ -1,0 +1,146 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message</title>
+    <script src="/toAll.js"></script>
+    <script src="/toMessages.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('navDiv').innerHTML = nav(); username(); admin(); unread();
+      });
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404"/>
+  </head>
+  <body style="background-color:#f9ecf2">
+    <div id="navDiv"></div>
+    <div style="text-align:center;">
+      <div>
+        <div style="text-align:left; display:inline-block;float:left;padding-top:30px;">
+          <label style="vertical-align:bottom;">Skru av lydvarsling:</label><input type="checkbox" id="lydCbx">
+        </div>
+        <div style="text-align:left; display:inline-block;float:left;padding-top:30px;">
+          <button id="forklarMsg" style="margin-left:40px;font-size:x-small;" onclick="speakMld()">Forklar meldinger<label style="font-size:xx-small;color:red;font-weight:bold;"> LYD</label></button>
+          <button id="forklarSpill" style="margin-left:40px;font-size:x-small;" onclick="speakSpill()">Forklar spill<label style="font-size:xx-small;color:red;font-weight:bold;"> LYD</label></button>
+        </div>
+        <h2 style="display:inline-block;position:relative;right:240;">Meldinger/Spill</h2>
+        <label style="font-weight:bold;color:#ff1a8c;font-size:larger;">5-PÅ-RAD</label></div>  
+      </div>
+      
+    
+    <div id="msgDiv" style="display:inline-block;width:16%;height:84%;background:white;vertical-align:top;border:1px solid silver;border-radius:5px;">
+      <div id="samtalerDiv" style="text-align:center;"><h3>Samtaler <span style="font-size:xx-small;font-weight:normal;color:red;">klikk for å se samtale</span></h3></div>
+      {{#if msgOverZero}}
+          {{#each lastFromEach}}
+            <button class="messageButt" data-tftest="{{this.tFtest}}" name="{{this.tFtest}}">
+              <div style="width:100%;text-align:left;font-size:smaller;" data-tftest="{{this.tFtest}}">
+                <label class="toFrom" style="font-weight:bold;" data-tftest="{{this.tFtest}}">{{this.other}}</label><label style="float:right;" class="toFrom" data-tftest="{{this.tFtest}}">{{this.time}}</label>
+              </div>
+              <div style="width:100%;text-align:left;padding-bottom:10px;font-size:smaller;" data-tftest="{{this.tFtest}}">
+                <label data-tftest="{{this.tFtest}}">{{this.content}}</label>
+              </div>
+            </button>
+          {{/each}}
+      {{else}}
+        <div id="noSamtaleDiv" style="text-align:center;">Ingen meldinger å vise</div>
+      {{/if}}      
+          
+          
+    </div>
+
+    <div id="chatDiv" style="display:inline-block;width:20%;height:84%;background:white;border:1px solid silver;border-radius:5px;">
+      <div style="text-align:center;"><h3 style="margin-bottom:0px;">Enkeltmeldinger/chat</h3></div>
+      <div style="text-align:center;"><button id="newMsgButt">Ny melding</button></div>
+      
+      <div id="newOrChatDiv" style="padding-top:15px;padding-left:15px;padding-right:15px;"></div>
+      
+      <div id="samtaleMedDiv" style="text-align:center;color:#cc6699;font-weight:bold;"></div>
+      <div id="earlierMsgDiv" style="overflow:auto;max-height:62%;">
+        <!--<div id="samtaleMedDiv" style="text-align:center;color:#cc6699;font-weight:bold;"></div>-->
+        <table id="earlierMsgTab" style="width:100%;padding-left:10px;padding-right:10px;margin-top:10px;"></table>
+      </div>
+      <div id="writeMsgDiv" style="padding-left:10px;">
+        
+      </div>
+      
+    </div>
+    
+    <div id="onlineDiv" style="display:inline-block; vertical-align:top;background:#FDFDB9;border-radius:5px;border:1px solid silver;
+                               padding:5px;color:#990099;width:28%;max-height:7%;"> 
+    </div>
+   
+    <div id="spillRequestDiv" style="display:inline-block; vertical-align:top;padding-left:10px;">
+      
+      <div id="gameReqToHide" style="display:inline-block;">
+        <h4 style="margin-top:0px;margin-bottom:5px;text-align:center;">Spillforespørsel</h4>
+        <label>Spør:</label>
+        <input type="text" list="onlineUsers" id="requestInput" class="recipInput" style="width:170px;"/>
+        <label style="font-size:x-small;">Svarfrist min.</label>
+        <input type="number" min="1" max="180" value="5" id="minutesInput" style="width:60px;">
+        <button id="sendRequestButt">Send</button>
+          <datalist id="onlineUsers"></datalist>
+      </div>
+      
+      <div id="spillActionDiv" style="height:10px;position:relative;left:-390;top:4;">
+        <div id="spillFlowDiv" style="display:inline-block;padding-top:6px;">
+          {{#if gameOn}}
+            {{#if activeplayer}}Det er din tur {{username}}
+            {{else}}Venter på {{opponent}}
+            {{/if}}
+          {{/if}}
+        </div>
+        <div id="spillSpecialDiv" style="display:inline-block;padding-top:6px;padding-left:10px;">
+          {{#if gameOn}}
+            {{#unless activeplayer}}
+              <button style="font-size:smaller;" onclick="cancelGame()" id="cancelGameButt">Avbryt spillet pga sen respons</button>
+            {{/unless}}
+          {{/if}}
+        </div>
+      </div>
+      
+      <div id="theGameDiv" style="position:relative;left:-390;top:25; display:inline-block; margin-right:-390px;">
+        <table id="gameTable">
+          {{#each board}}
+          <tr>
+            {{#each this}}<td><button id="{{this.id}}" class="{{this.class}}">{{this.value}}</button></td>{{/each}}  <!-- class="gameButt" -->
+          </tr>
+          {{/each}}
+        </table>
+      </div>
+      
+    </div>
+    
+    <div id="hiddenFetchElm" style="display:none;"></div>
+    
+    <div id="hiddenElements" style="display:none;">
+      <div id="newMessageDiv">
+        <table>
+          <tr>
+            <td>Til:</td>
+            <td><input type="text" list="usernamesContext" id="recipInput" class="recipInput" />
+                <datalist id="usernamesContext">
+                  {{#each usernames}}
+                  <option>{{this}}</option>
+                  {{/each}}
+                </datalist>
+            </td>
+          </tr>  
+        </table>
+      </div>
+      
+    </div>
+    
+    
+    <div id="hiddenPlayerSymbol" style="display:none;">{{playerSymbol}}</div>
+    <div id="hiddenOpponent" style="display:none;">{{opponent}}</div>
+    <div id="hiddenActiveplayer" style="display:none;">{{activeplayer}}</div>
+    
+    <div id="hiddenRemovePlayer" style="display:none;">{{removePlayer}}</div>
+    <div id="hiddenMsgCount" style="display:none;">{{countMsg}}</div>
+    <div id="hiddenUsernames" style="display:none;">{{usernames}}</div> 
+    <div id="hiddenUsername" style="display:none;">{{username}}</div>
+    <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+  </body>
+</html>

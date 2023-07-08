@@ -1,0 +1,107 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Om siden</title>
+    <script src="/toAll.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        document.getElementById('navDiv').innerHTML = nav(); username(); admin(); unread();
+        document.getElementById('showAdmButt').addEventListener('click', showAdm);
+        document.getElementById('hideAdmButt').addEventListener('click', hideAdm);
+      });
+      
+      function showAdm(){
+        document.getElementById('nettsideUl').style.display = 'none';
+        document.getElementById('showAdmDiv').style.display = 'initial';
+      }
+      
+      function hideAdm(){
+        document.getElementById('nettsideUl').style.display = 'initial';
+        document.getElementById('showAdmDiv').style.display = 'none';
+      }
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404"
+    />
+
+  </head>
+  <body style="background-color:#f9ecf2">
+    <div id="navDiv"></div>
+
+    <div
+      style="text-align:center; margin:auto; width:62%; background-color:#FDFDB9; padding-left:70px;padding-right:60px; border-radius:5px; border:1px solid grey;margin-top:15px;"
+    >
+      <h1 style="color:#990099;margin-bottom:-15px;">Om nettsiden</h1>
+      <ul id="nettsideUl">
+        <li class="aboutLi">Er laget med <label style="line-height:65px;">
+          <a class="linkLogo" href="https://glitch.com" >
+            <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/GlitchLogo1.png?v=1684916190363" height="30px" style="position:relative;top:3px;">
+            <!--<label style="font-size:smaller">Glitch.com</label>-->
+          </a>
+          </label>
+          <ul>
+            <li class="aboutLiLi">derav det rare domenenavnet/nettadressen</li>
+          </ul>
+        </li>
+        <li class="aboutLi">Server-koden er skrevet i 
+          <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/NodeLogo1.jfif?v=1684918436859" height="30px" style="position:relative;top:4px;">
+          i rammeverket
+          <a class="linkLogo" href="https://www.fastify.io/"><!--fastify.io-->
+            <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/FastifyLogo.png?v=1684917617553" height="30px" style="position:relative;top:4px;">      
+          </a>
+          <ul>
+            <li class="aboutLiLi">min bakgrunn mht web-programming er
+              Python/Django</li>
+          </ul>
+        </li>
+        <li class="aboutLi">Databasen er 
+          <a class="linkLogo" href="https://www.sqlite.org/index.html">
+            <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/SqliteLogo1.png?v=1684918863677" height="30px" style="position:relative;top:0px;">
+          </a>
+          <ul>
+            <li class="aboutLiLi">bruker ikke noe ORM, men bruker Fastifys
+              run/get/all-funksjoner til å skrive ren SQL</li>
+            <li class="aboutLiLi">har laget en Administrator-løsning, men den kan du ikke se medmindre du logger inn som meg
+            <button id="showAdmButt" style="font-size:x-small;padding:0px;background:#f9ecf2;border-radius:5px;border:1px solid silver;color:#990099">video</button></li>
+          </ul>
+        </li>
+        <li class="aboutLi">Har skrevet all session- og login-håndtering selv
+          fra bunnen
+          <ul>
+            <li class="aboutLiLi">bruker ikke noen ferdige
+              funksjoner/biblioteker for dette ala det som finnes i Django</li>
+          </ul>
+        </li>
+        <li class="aboutLi">Bruker <b class="utheving">bcrypt</b> til hashing av passord...
+          <a href="https://en.wikipedia.org/wiki/Bcrypt" style="font-size:smaller;">Wikipedia</a>&nbsp&nbsp&nbsp
+          <a href="https://www.makeuseof.com/nodejs-bcrypt-hash-verify-salt-password/" style="font-size:smaller;">How To</a>
+        </li>
+        <li class="aboutLi">Laget under/rett etter eksamensperioden i mai 2023
+        <ul>
+            <li class="aboutLiLi">har måttet lære meg Node.js/Fastify for å få noe på nett raskt/billig</li>
+          </ul>
+        </li>
+        <li class="aboutLi" style="list-style-type:'=> '; color:black; font-weight:bolder;">Viser <i>litt</i> av hva jeg har lært på et snaut år</li>
+      </ul>
+      
+      <div id="showAdmDiv" style="display:none;">
+        <button id="hideAdmButt" style="float:right;border-radius:5px;margin-top:20px;">Skjul video</button>
+        <video width="700" height="394" controls style="margin-bottom:50px;margin-top:20px;">
+          <source src="https://cdn.glitch.me/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Adm.mp4?v=1685966996451" type="video/webm">
+          <source src="https://cdn.glitch.me/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Adm.mp4?v=1685966996451" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+    </div>
+
+    <div id="hiddenMsgCount">{{countMsg}}</div>
+    <div id="hiddenUsername" style="display:none;">{{username}}</div>
+    <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+  </body>
+</html> 

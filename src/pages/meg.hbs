@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Om meg</title>
+    <link rel="stylesheet" href="/styleEgen.css" />
+    <script src="/scriptEgen.js" defer></script>
+    <script src="/toAll.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        document.getElementById('navDiv').innerHTML = nav();
+        username();
+        admin();
+        unread();
+      });
+    </script>
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404">
+</head>
+<body>
+  <div class="bigDiv">
+    <div id="navDiv"></div>
+    <h1 id="dMeg">
+      Dette er meg
+    </h1>
+    <div id="meTabDiv">
+      <table id="meTab">
+      <!-- <caption>Dette er meg:</caption> -->
+        <tr id="tr1">
+          <td style="font-weight:bold; font-size:larger; color:darkblue;" colspan="2">Studerer programmering og ser nå etter jobb som utvilker</td>
+        </tr>
+        <tr id="tr2">
+          <td class="semiHead">Nettkurs ved Harvard University</td><td><i>Dokumentasjon</i></td>
+        </tr><tr id="tr3">
+        <td><li>CS50P CS50's Introduction to Programming with Pyton</li></td><td>Certificate</td>
+        </tr><tr id="tr4">
+            <td><li>CS50X CS50's Introduction to Computer Science</li></td><td>Certificate</td>
+        </tr><tr id="tr5">
+            <td><li>CS50W CS50's Web Programming with Python and JavaScript</li></td><td>Certificate</td>
+        </tr><tr id="tr6">
+            <td><li>CS50AI CS50’s Introduction to Artificial Intelligence with Python</li></td><td>Ongoing</td>
+        </tr>
+        <tr id="tr7">
+            <td class="semiHead">Backend-Programmering ved Gokstad Akademiet</td>
+          </tr><tr id="tr8">
+            <td><li>Grunnleggende Programmering, Høst 2022</li></td><td>Eksamen</td>
+          </tr><tr id="tr9">
+            <td><li>Datamodellering og Databasesystemer, Høst 2022</li></td><td>Eksamen</td>
+          </tr><tr id="tr10">
+            <td><li>Objektorientert Programmering, Vår 2023</li></td><td id="dato1">Eksamen</td>
+          </tr><tr id="tr11">
+            <td><li>Programvareutviklingsmetoder, Vår 2023</li></td><td id="dato2">Eksamen</td>
+          </tr><tr id="tr12">
+            <td class="semiHead">Tidligere</td>
+          </tr><tr id="tr13">
+            <td><li>Trader/Porteføljeforvalter/Analytiker 20+ år</li></td><td></td>
+          </tr><tr id="tr14">
+            <td><li>Siviløkonom NHH</li></td><td></td>
+          </tr>
+      </table>
+    </div>
+    <div id="meImg">
+      <img src="https://cdn.glitch.global/8eef8a80-7713-49ec-8f3f-add671064bca/thumbnails%2Fme.jpg?1683281023948">
+    </div>
+    <div id="mePrivDiv">
+      <ul>
+        <li style="list-style-type:'=>'" class="gledeMainLi" id="elsker">Elsker programmering og kan ikke få nok! 💻
+          <li style="font-size:smaller;text-align:center;list-style-type:none;" id="samboer">(bare spør samboeren min)</li>
+        </li>
+        <li style="list-style-type:'=>'" class="gledeMainLi" id="glede">😊Min stolthet og glede❤️: 
+          <li id="glede1">
+            <table>
+              <td style="vertical-align:middle;" class="megHjerte">🌞 Janicke</td>
+              <td><img src="https://cdn.glitch.global/8eef8a80-7713-49ec-8f3f-add671064bca/thumbnails%2Fjanicke.png?1683292109558" width="50px"></td>
+              <td class="megHjerteSiste"><li>Førskolelærer</li><li>Elsker tennis</li></td>
+            </table>
+          </li>
+          <li id="glede2">
+            <table>
+              <td style="vertical-align:middle;" class="megHjerte">🌞 Marius</td>
+              <td><img src="https://cdn.glitch.global/8eef8a80-7713-49ec-8f3f-add671064bca/thumbnails%2Fstudent.jpg?1683293061931" width="50px"></td>  
+              <td class="megHjerteSiste"><li>Psykolog</li><li>Spiller tennis</li></td>
+            </table>
+          </li>
+          <li id="glede3">
+            <table>
+              <td style="vertical-align:middle;" class="megHjerte">🌞 Simen</td>
+              <td><img src="https://cdn.glitch.global/8eef8a80-7713-49ec-8f3f-add671064bca/thumbnails%2Fsimen.jpg?1683293280968" width="50px"></td>  
+              <td class="megHjerteSiste"><li>Lærerstudent</li><li>Elsker fotball og Man City</li></td>
+            </table>
+          </li>
+          <li id="liker" style="list-style-type:'=>'" class="gledeMainLi">Liker å reise 🏖️🏙️ og å gå tur i naturen 🌳</li>
+          <li id="interesser" style="list-style-type:'=>'" class="gledeMainLi">Interessert i politikk, finans, fotball og tennis</li>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+   <div id="hiddenMsgCount" style="display:none;">{{countMsg}}</div>
+   <div id="hiddenUsername" style="display:none;">{{username}}</div>
+   <div id="hiddenAdm" style="display:none;">{{admin}}</div> 
+</body>
+
+</html>

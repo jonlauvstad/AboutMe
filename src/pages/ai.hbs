@@ -1,0 +1,76 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI</title>
+    <script src="/toAll.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('navDiv').innerHTML = nav(); username(); admin(); unread();
+      });
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404"
+    />
+
+  </head>
+  <body style="background-color:#f9ecf2">
+    <div id="navDiv"></div>
+
+    <div style="text-align:center; margin:auto; width:70%; background-color:white; min-height:650px;border-radius:5px;border: 1px solid grey;margin-top:15px;">
+      <h1 class="utheving" style="margin-top:5px;">Artificial Intelligence</h1>
+      <div style="text-align:left; padding-left:50px;font-size:larger;">
+        <ul id="cs50Ul">
+          <li>Jeg har bare tatt én forelesning i 
+            <a href="https://pll.harvard.edu/course/cs50s-introduction-artificial-intelligence-python?delta=1">Harvard Universitys CS50 AI</a>
+          </li>
+          <li>Men det var så kult at jeg bare spant avgåde i noen egne prosjekter... recursion er kult!</li>
+          <li><b class="utheving">Tic-Tac-Toe</b>  <a href="/ticTacToe">Slå bot'n min!</a> <label style="font-size:smaller;">(rar grafikk*)</label>
+            <ul>
+              <li style="list-style-type:none;font-size:smaller;padding-top:6px;text-indent: -20px;">
+                *Skyldes at dette er en html-fil laga for å kunne spilles på mobilen - all "AI"-koden er i html-fila
+              </li>
+            </ul>
+          </li>
+          <li><b class="utheving">5-på-rad aka Tysktime</b> <label style="font-size:smaller;">- algoritmen funker, men tar evigheter (1 time+ når 15 trekk)</label></li>
+          <li><b class="utheving">Yatzy</b>...vanskeligere enn du tror! 
+            <label style="font-size:smaller;">(skrevet i Python/Django, så bare film) &nbsp<a href="/pythonYatzy">Python kode</a></label></li>
+        </ul>
+      </div>
+      <div style="text-align:left; padding-left:90px; padding-bottom:15px; display:inline-block; width:55%; float:left;">
+        <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/jSwMXOOY3j4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+        <video width="560" height="315" controls>
+          <source src="https://cdn.glitch.me/7af6f737-b2be-4868-8ec6-c1c8262f00aa/RoboYatzy.mp4?v=1684835500297" type="video/webm">
+          <source src="https://cdn.glitch.me/7af6f737-b2be-4868-8ec6-c1c8262f00aa/RoboYatzy.mp4?v=1684835500297" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      
+      <div style="text-align:left; padding-left:0px;font-size:larger; display:inline-block; width:29%;">
+        <label><b class="utheving">Om Yatzy:</b></label>
+        <ul>
+          <li style="padding-bottom:10px">Ja, det er tvungen</li>
+          <li style="padding-bottom:10px">Men selv det er komplekst</li>
+          <li style="list-style-type:'=> '; font-size:smaller;padding-bottom:7px">Hva spare på når skal ha hus?</li>
+          <li style="list-style-type:'=> '; font-size:smaller;padding-bottom:7px">Hva spare på når skal ha 4like?</li>
+          <li style="list-style-type:'=> '; font-size:smaller;padding-bottom:7px">AI: Velger utfra å maksimere forventet score</li>
+          <li style="list-style-type:'=> '; font-size:smaller;padding-bottom:7px">Ingen eksplisitte instruksjoner</li>
+          <li style="list-style-type:'=> '; font-size:smaller;padding-bottom:7px">Recursion</li>
+        </ul>  
+        
+      </div>
+      
+
+      
+    </div>
+    
+
+    <div id="hiddenMsgCount">{{countMsg}}</div>
+    <div id="hiddenUsername" style="display:none;">{{username}}</div>
+    <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+  </body>
+</html>
