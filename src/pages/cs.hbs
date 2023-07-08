@@ -1,0 +1,148 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C#</title>
+    <script src="/toAll.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('navDiv').innerHTML = nav(); username(); admin(); unread();
+      document.querySelectorAll('.showCsVideoButt').forEach( elm => elm.addEventListener('click', hideShowVideo))
+      });
+      
+      function hideShowVideo(event){
+        const theButt = event.target;
+        const theIdToLookup = theButt.dataset.videoid;
+        const theVideoDiv = document.getElementById(theIdToLookup);
+        const videoLogoDiv = document.getElementById('videoLogoDiv');
+        if(theButt.innerHTML == 'Vis video'){
+          videoCSharpDiv.innerHTML = theVideoDiv.innerHTML;
+          theButt.innerHTML = 'Skjul video';
+          document.querySelectorAll(".showCsVideoButt").forEach(elm => {
+            if(elm.dataset.videoid != theIdToLookup){
+              elm.innerHTML = "Vis video";
+            }
+          })
+        }
+        else{
+          videoCSharpDiv.innerHTML = videoLogoDiv.innerHTML;
+          theButt.innerHTML = 'Vis video';
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404"
+    />
+
+  </head>
+  <body style="background-color:#f9ecf2">
+    <div id="navDiv"></div>
+
+    <div style="text-align:center; margin-left:auto;margin-right:auto;margin-top:20px; width:100%;border-radius:5px; background-color:#FDFDB9; min-height:650px;border:1px solid grey;">
+      <h1 style="color:#990099;">C# Prosjekter</h1>
+      <table id="csTable" style="display:inline-block;float:left;">
+        
+        <tr>
+          <th class="csTab">Tax returns</th>
+          <td><ul>
+                <li>Windows Forms app som <button class="showCsVideoButt" data-videoid="taxReturn">Vis video</button></li>
+                <li>Leser transdata fra SaxoBanks csv-filer - kun rådata: Aggregeringer 
+                  <br>  og det meste av realiseringer (FIFO/LIFO/WAG) beregnes i programmet</li>
+                <li>Beregner skattemessige realiseringer fordelt på produkter og handler</li>
+                <li>Skriver resultatet til html- og pdf-fil</li>
+              </ul>
+          </td> 
+        </tr>
+        
+        <tr>
+          <th class="csTab">Finansgrafer</th>
+          <td><ul>
+                <li>Windows Forms app som <button class="showCsVideoButt" data-videoid="finCharts">Vis video</button></li>
+                <li>Leser csv-filer fra Norges Bank/Oslo Børs</li>
+                <li>Lager ulike typer grafer med dataene inkludert kul "Yielcurve Movie"</li>
+            </ul>
+          </td>
+        </tr>
+        
+        <tr>
+          <th class="csTab">"Livekurser"</th>
+          <td><ul>
+                <li>Windows Forms app som genererer aksjekurser som geometrisk <button class="showCsVideoButt" data-videoid="liveCharts">Vis video</button>
+                  <br>brownsk prosess, konfigurert med ulike Betas og volatiliteter
+                </li>
+                <li>Lager "Live-charts" med kursene med ulike tradingfrekvenser</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <th class="csTab">Poker Hjelper</th>
+          <td><ul>
+                <li>Konsollapp som beregner vinnersannsynligheter i Texas Hold'em <button class="showCsVideoButt" data-videoid="moneyMaker">Vis video</button>
+                </li>
+                <li>Beslutningsstøtte ved hjelp av simuleringer</li>
+            </ul>
+          </td>
+        </tr>
+        
+        
+      </table>
+      
+      <div style="display:inline-block;padding-top:50px;" id="videoCSharpDiv">
+        <img src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Csharp1.png?v=1684859161776" width="380px">
+      </div>
+              
+    </div>
+      
+    
+    <div style="display:none">
+      <div id="taxReturn">
+        <video width="560" height="315" controls>
+          <source src="https://cdn.glitch.me/7af6f737-b2be-4868-8ec6-c1c8262f00aa/TaxReturns.mp4?v=1684842592810" type="video/webm">
+          <source src="https://cdn.glitch.me/7af6f737-b2be-4868-8ec6-c1c8262f00aa/TaxReturns.mp4?v=1684842592810" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      
+      <div id="finCharts">
+          <video width="560" height="315" controls>
+            <source src="https://cdn.glitch.me/7af6f737-b2be-4868-8ec6-c1c8262f00aa/WinFormsStockBond.mp4?v=1684838556791" type="video/webm">
+            <source src="https://cdn.glitch.me/7af6f737-b2be-4868-8ec6-c1c8262f00aa/WinFormsStockBond.mp4?v=1684838556791" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      
+      <div id="liveCharts">
+          <video width="560" height="315" controls>
+            <source src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/LiveStockPrices.mp4?v=1684839598582" type="video/webm">
+            <source src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/LiveStockPrices.mp4?v=1684839598582" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      
+      <div id="moneyMaker">
+          <video width="560" height="315" controls>
+            <source src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/MoneyMaker.mp4?v=1684824663181" type="video/webm">
+            <source src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/MoneyMaker.mp4?v=1684824663181" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+      
+    </div>
+    
+    
+    
+    <div style="display:none;" id="videoLogoDiv">
+      <img id="cSharpLogo" src="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Csharp1.png?v=1684859161776" width="350px">
+    </div>
+    
+    <div id="hiddenMsgCount">{{countMsg}}</div>
+    <div id="hiddenUsername" style="display:none;">{{username}}</div>
+    <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+  </body>
+</html>

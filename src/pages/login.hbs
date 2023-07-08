@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <script src="/toAll.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('navDiv').innerHTML = nav();
+      username();
+    });
+  </script>
+  <link rel="stylesheet" href="/myStyle.css" />
+  <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404">
+</head>
+<body>
+  <div id="navDiv"></div>
+  <h2>Login</h2>
+  <div style="display:inline-block;">
+    <form action="/login" method="post">  
+    <table>
+      <tr>
+        <td>Brukernavn:</td>
+        <td><input name="username" required placeholder="Brukernavn"></td>
+      </tr>
+      <tr>
+        <td>Passord:</td>
+        <td><input name="password" type="password" placeholder="Passord" required></td>
+      </tr>
+      <tr>
+        <td style="font-size:x-small;"></td>
+        <td><input type="submit" style="width:100%;" class="button"></td>
+      </tr>
+    </table>
+    </form>
+    <label class="errMsg" style="font-size:smaller;">{{message1}}</label><br>
+    <label class="errMsg" style="font-size:smaller;">{{message2}}</label>
+  </div>
+  
+  <div id="hiddenUsername" style="display:none;"></div>
+</body>
+</html>

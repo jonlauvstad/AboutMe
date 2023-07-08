@@ -1,0 +1,51 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Om siden</title>
+    <script src="/toAll.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        document.getElementById('navDiv').innerHTML = nav(); username(); admin(); unread();
+        document.getElementById('showAdmButt').addEventListener('click', showAdm);
+        document.getElementById('hideAdmButt').addEventListener('click', hideAdm);
+      });
+      
+      function showAdm(){
+        document.getElementById('nettsideUl').style.display = 'none';
+        document.getElementById('showAdmDiv').style.display = 'initial';
+      }
+      
+      function hideAdm(){
+        document.getElementById('nettsideUl').style.display = 'initial';
+        document.getElementById('showAdmDiv').style.display = 'none';
+      }
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404"
+    />
+
+  </head>
+  <body style="background-color:#f9ecf2">
+    <div id="navDiv"></div>
+
+    <div
+      style="text-align:center; margin:auto; width:56%; background-color:#FDFDB9; padding-left:70px;padding-right:60px; border-radius:5px; border:1px solid grey;margin-top:35px;"
+    >
+      <h1 style="color:#990099;margin-bottom:-15px;">Spill</h1>
+      <ul style="text-align:left;font-size:x-large;padding-left:45px;">
+        <li style="padding-top:20px;padding-bottom:25px;"><a href="/ticTacToe">Slå Tic-Tac-Toe roboten min!</a></li>
+        <li style="padding-top:20px;padding-bottom:25px;"><a href="/messages">Gå til Meldinger/Onlinespill og invitér noen til et slag 5-på-rad!</a></li>
+        <li style="padding-top:20px;padding-bottom:25px;">Kommer sannsynligvis mer senere...🚧...under construction...</li>
+      </ul>
+    </div>
+
+    <div id="hiddenMsgCount">{{countMsg}}</div>
+    <div id="hiddenUsername" style="display:none;">{{username}}</div>
+    <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+  </body>
+</html> 

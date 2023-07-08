@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hjem</title>
+    <script src="/toNewIndex.js"></script>
+    <script src="/toAll.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        document.getElementById('navDiv').innerHTML = nav();
+        username();
+        admin();
+        unread();
+      });
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404">
+</head>
+<body id="newIndexBody">
+  <div id="navDiv"></div>
+  <div style="text-align:center; margin:auto; width:56%; background-color:white;">
+    <h1>Velkommen til Anders' nettside!</h1>
+    {{#if isLoggedIn}}
+    <div style="text-align:left;padding-left:125px;" id="indexLoggedInDiv">
+      <li class="loggedInMenuLi" style="list-style-type:'👨‍💻 '"><a href="/me">Få vite mer om meg som utvikler</a></li>
+      <li class="loggedInMenuLi" style="list-style-type:'📊 '"><a href="/vote">Delta i spennende avstemninger</a></li>
+      <li class="loggedInMenuLi" style="list-style-type:'▶️ '"><a href="/projects">Mine småprosjekter</a></li>
+      <li class="loggedInMenuLi" style="list-style-type:'🕹️ '"><a href="/games">Spill</a></li>
+      <li class="loggedInMenuLi" style="list-style-type:'🌐 '"><a href="/about">Om denne nettsiden</a></li>
+      <li class="loggedInMenuLi" style="list-style-type:'💬 '"><a href="/messages">Meldinger/Onlinespill</a>
+        <label style="font-size:small; font-weight:bolder; color:orange;"> MEST SEXY PÅ DENNE NETTSIDEN</label>
+      </li>
+    </div>
+    {{else}}
+    <div style="text-align:left;" id="indexLiDiv">
+      <li id="li1" class="indexLiDiv">Poenget med denne nettsida er å presentere meg som utvikler</li>  
+      <li id="li2" class="indexLiDiv" style="color:red;">Dersom du registrerer deg/logger inn, vil det poppe opp flere muligheter i navbaren over 🔐</li>
+      <li id="li3" class="indexLiDiv">Du trenger kun å finne på et brukernavn og et passord...</li>
+      <li id="li4" class="indexLiDiv" style="margin-bottom:20px;">OK, registrering var ikke strengt tatt nødvendig, men</li>
+      <li id="li5" class="indexLi">begrenser info'n til dem som faktsik er interesserte nok til å registrere seg</li>
+      <li id="li6" class="indexLi">gir mulighet til å demonstrere litt backend</li>
+      
+      <a href="/register" id="indexRegA">Registrér meg!</a>  
+      
+    </div>
+    {{/if}}
+  </div>
+  
+  <div id="hiddenMsgCount">{{countMsg}}</div>
+  <div id="hiddenIsLoggedIn" style="display:none;">{{isLoggedIn}}</div>
+  <div id="hiddenUsername" style="display:none;">{{username}}</div>
+  <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrasjon</title>
+    <script src="/toAll.js"></script>
+    <script src="/toAdm.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        document.getElementById('navDiv').innerHTML = nav();
+        username();
+        admin();
+        unread();
+      });
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404">
+</head>
+<body>
+  <div id="navDiv"></div>
+  <h2 style="margin-bottom:0px;">Admin</h2>
+  <div style="display:inline-block; width:700px;" id="allDBMgmtDiv">
+    
+    <h3 style="margin-bottom:0px;">Database Management</h3>
+    
+    <div style="display:inline-block"><button id="writeSQLButt" class="showButtsPlus">Write SQL</button></div>
+    <div style="display:inline-block"><button id="showTabBut" class="showButtsPlus">Show tables</button></div>
+    <div style="display:inline-block"><button id="showSchemaButt" class="showButtsPlus">Show schema</button></div>
+    <div style="display:none;" id="chooseTableDiv">
+      <input id="tableInput" placeholder="Table name"  class="showButtsPlus" style="background:white; color:black; max-width:110px;">
+      <button id="chooseTableButt" class="showButtsPlus">Get schema</button>
+    </div>
+    <div style="display:inline-block"><button id="showHashButt" class="showButtsPlus">Get Hash</button></div>
+    <div style="display:none;" id="hashDiv">
+      <input id="hashInput" placeholder="Test Password" type="text"  class="showButtsPlus" style="background:white; color:black; max-width:110px;">
+      <button id="getHashButt" class="showButtsPlus">Submit</button>
+    </div>
+    
+    <div id="contentDBMgmtDiv" style="margin-top:5px;"></div>
+    
+    <div id="hiddenElements" style="display:none">
+      
+      <div id="tablesDiv">
+        <div style="border:1px solid silver; min-width:300px; position:absolute; z-index:2;">
+          <button class="hideTablesButt hideButt" style="position:absolute; right:0; bottom:0; font-size:xx-small; margin:5px;">Hide</button>
+          <ul id="tableUl"><u><b>Tables</b></u></ul>  
+        </div>  
+      </div>
+      
+      <div id="schemaDiv">
+        <div id="displaySchemaDiv" style="border:1px solid silver; min-width:300px; max-width:700px; position:absolute; z-index:3; padding:5px;">
+          <label id="displaySchemaLabel"></label>
+          <button id="hideSchemaButt" class="hideSchemaButt hideButt" style="position:absolute; right:0; top:0; font-size:xx-small; margin:5px;">Hide</button>
+        </div>
+      </div>
+      
+      <div id="writeDiv">
+        <div style="border:1px solid silver; max-width:700px; position:absolute; z-index:3; padding:5px; font-size:small;">
+          <div style="display:inline-block;">Write your SQL below: </div>
+          <div style="display:inline-block; padding-left:50px">
+            Or to drop table, select:
+            <select id="dropSelect">
+              <option disabled selected></option>
+              {{#each tables}}
+                <option>{{this.name}}</option>
+              {{/each}}
+            </select>
+            <button id="dropButt" style="visibility:hidden">Drop the</button>
+          </div>
+          <div>
+              <textarea id="sqlTextArea" class="sqlTextArea" placeholder="Write your SQL statement here" style="min-width:650px; margin-top:5px; border:1px solid silver;"></textarea>
+          </div>
+          <button id="clearTA" class="hideButt" style="margin-right:10px;font-size:xx-small;">Clear</button>
+          <div style="display:inline-block; float:right;">
+            <label style="padding-right:5px;font-size:x-small;">Create/drop/alter table:</label><button id="runButt" class="sqlButt">Run</button>
+            <label style="padding-right:5px;font-size:x-small;">Query/first occurance:</label><button id="getButt" class="sqlButt">Get</button>
+            <label style="padding-right:5px;font-size:x-small;">Query multiple occ.:</label><button id="allButt" class="sqlButt">All</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="queryResult"></div>
+      
+      <div id="hashResultDiv">
+        <label id="hashResultLabel" style="font-size:smaller;"></label>
+        <button id="hideHashButt" class="hideButt" style="font-size:xx-small">Hide</button>
+      </div>
+      
+      <div id="belowDiv">
+        <div>
+          <h3 style="margin-bottom:0px;">En div under DB-Mgmt: Ikke fått bruk for enda</h3>
+        </div>  
+      </div>
+        
+    </div>
+    
+    
+    
+  </div>
+  <div id="besideDbMgmt" style="display:inline-block; padding-left:30px; padding-right:30px; vertical-align:top;">
+    <h3 style="margin-bottom:0px;">Ad-hoc funksjoner</h3>
+    <div>
+      <button onclick="makeJSON()">Make JSON-string with board-ids, -values and -class</button>
+      <button id="hideJSON" onclick="hideJSON(event)" style="display:none">hide</button>
+      <div id="jsonDiv"></div>
+    </div>
+  </div>
+  
+  <div id="hiddenMsgCount">{{countMsg}}</div>
+  <div id="hiddenUsername" style="display:none;">{{username}}</div>
+  <div id="hiddenAdm" style="display:none;">{{admin}}</div> 
+  
+</body>
+</html>

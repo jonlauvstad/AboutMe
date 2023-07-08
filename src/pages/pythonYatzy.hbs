@@ -1,0 +1,381 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python yatzy</title>
+    <script src="/toAll.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('navDiv').innerHTML = nav(); username(); admin(); unread();
+      });
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404"
+    />
+
+  </head>
+  <body style="background-color:#f9ecf2">
+    <div id="navDiv"></div>
+
+    <div style="text-align:center; margin:auto; width:90%; background-color:white; min-height:650px;">
+      <h2>Python koden som gjør 'the heavy lifting' i Yatzy</h2>
+      <ul>
+        <h3 class="utheving">💡Funksjonen "theLoop" er der "the magic happens" (aka recursion)💡</h3>  
+      </ul>
+      <div style="text-align:left;padding:30px;">
+       <p>import random</p>
+      <p>import json</p>
+      <p><br></p>
+      <p>sider_t = 6</p>
+      <p>terskel = 2 &nbsp; &nbsp; # Antall kast f&oslash;r siste, alts&aring; totalt 3 kast.</p>
+      <p>#num_dice = 5</p>
+      <p><br></p>
+      <p><br></p>
+      <p>def theLoop(num_dice, kast, goal, combos, theCounter):</p>
+      <p>&nbsp; &nbsp; opts = options(num_dice, kast)</p>
+      <p>&nbsp; &nbsp; c = 0</p>
+      <p>&nbsp; &nbsp; # Loope igjennom</p>
+      <p>&nbsp; &nbsp; pnts_list = []</p>
+      <p>&nbsp; &nbsp; for opt in opts:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; counter = 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; p = 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if num_dice - len(opt) == 0:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; d = {}</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for i in range(1, 7):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; d[i] = opt.count(i)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; p += points(goal, d) * combos[num_dice - len(opt)][2][counter]</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; else:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for item in combos[num_dice - len(opt)][1]:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; d = {}</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for key, value in item.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; d[key] = value</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; d[key] += opt.count(key)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if theCounter &lt; terskel:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; p += theLoop(num_dice, dicToList(d), goal,combos, theCounter+1)[0] * combos[num_dice - len(opt)][2][counter]</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #p_ = theLoop(num_dice, dicToList(d), goal,combos, theCounter+1)[0]</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #if c == 0:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #print(dicToList(d), p_)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #p = max(p, p_)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; p += points(goal, d) * combos[num_dice - len(opt)][2][counter]</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; counter += 1</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; c += 1</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; pnts_list.append(p)</p>
+      <p>&nbsp; &nbsp; theMax = max(pnts_list)</p>
+      <p>&nbsp; &nbsp; theIndex = pnts_list.index(theMax)</p>
+      <p>&nbsp; &nbsp; theChoice = opts[theIndex]</p>
+      <p>&nbsp; &nbsp; return [theMax, theIndex, theChoice]</p>
+      <p><br></p>
+      <p><br></p>
+      <p>def dicToList(dic):</p>
+      <p>&nbsp; &nbsp; theL = []</p>
+      <p>&nbsp; &nbsp; for key, value in dic.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(value):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; theL.append(key)</p>
+      <p>&nbsp; &nbsp; return theL</p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p>def options(num_dice, kast):</p>
+      <p>&nbsp; &nbsp; ops = []</p>
+      <p>&nbsp; &nbsp; for i in range(num_dice + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; #for item in keep(i, num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for item in KEEP[num_dice-5][i]:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opt_kast = []</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for elm in item:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opt_kast.append(kast[elm])</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ops.append(opt_kast)</p>
+      <p>&nbsp; &nbsp; return ops&nbsp;</p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p>def keep(num_keep, num_dice):</p>
+      <p>&nbsp; &nbsp; lis = []</p>
+      <p>&nbsp; &nbsp; if num_keep == 6:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for j in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for k in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for l in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for m in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for n in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if j &gt; i and k &gt; j and l &gt; k and m &gt; l and n&gt;m:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i, j, k, l, m, n])</p>
+      <p>&nbsp; &nbsp; if num_keep == 5:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for j in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for k in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for l in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for m in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if j&gt;i and k&gt;j and l&gt;k and m&gt;l:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i, j, k, l, m])</p>
+      <p>&nbsp; &nbsp; if num_keep == 4:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for j in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for k in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for l in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if j&gt;i and k&gt;j and l&gt;k:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i, j, k, l])</p>
+      <p>&nbsp; &nbsp; if num_keep == 3:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for j in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for k in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if j &gt; i and k &gt; j:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i, j, k])</p>
+      <p>&nbsp; &nbsp; if num_keep == 2:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for j in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if j&gt; i:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i, j])</p>
+      <p>&nbsp; &nbsp; if num_keep == 1:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i])</p>
+      <p>&nbsp; &nbsp; if num_keep == 0:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; lis.append([])</p>
+      <p>&nbsp; &nbsp; return lis</p>
+      <p><br></p>
+      <p>def roll(sider_t, num_dice):</p>
+      <p>&nbsp; &nbsp; return_list = []</p>
+      <p>&nbsp; &nbsp; for i in range(num_dice):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return_list.append(random.randint(1, sider_t))</p>
+      <p>&nbsp; &nbsp; return_dict = {}</p>
+      <p>&nbsp; &nbsp; for i in range(1, sider_t+1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return_dict[i] = return_list.count(i)</p>
+      <p>&nbsp; &nbsp; return [return_list, return_dict]</p>
+      <p><br></p>
+      <p><br></p>
+      <p>def points(goal, unordered_dice):</p>
+      <p>&nbsp; &nbsp; #if goal in [&apos;1&apos;,&apos;2&apos;,&apos;3&apos;,&apos;4&apos;,&apos;5&apos;,&apos;6&apos;] or goal in [1,2,3,4,5,6]:</p>
+      <p>&nbsp; &nbsp; tall_liste = [&apos;enere&apos;, &apos;toere&apos;, &apos;treere&apos;, &apos;firere&apos;, &apos;femere&apos;, &apos;seksere&apos;]</p>
+      <p>&nbsp; &nbsp; if goal in tall_liste:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; g = tall_liste.index(goal) + 1</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return unordered_dice[g] * g</p>
+      <p>&nbsp; &nbsp; #goal = goal.upper()</p>
+      <p>&nbsp; &nbsp; if goal == &apos;par&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; e_list = []</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value &gt;= 2:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e_list.append(key)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if not e_list:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return max(e_list) * 2</p>
+      <p>&nbsp; &nbsp; if goal == &apos;like3&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; e_list = []</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value &gt;= 3:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e_list.append(key)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if not e_list:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return max(e_list) * 3</p>
+      <p>&nbsp; &nbsp; if goal == &apos;like4&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value &gt;= 4:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return key * 4</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; if goal == &apos;like5&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value &gt;= 5:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return key * 5</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; if goal == &apos;yatzy&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; ant_tern = 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ant_tern += value</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value == ant_tern:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if ant_tern == 5:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 50</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 100</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; if goal == &apos;par2&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; e_list = []</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value &gt;= 2:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e_list.append(key)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if not e_list:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if len(e_list) == 2:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 2*(e_list[0] + e_list[1])</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if len(e_list) == 3:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 2*(e_list[0] + e_list[1] + e_list[2] - min(e_list))</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if len(e_list) == 1 and unordered_dice[e_list[0]] &gt;= 4:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return e_list[0] * 4</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; if goal == &apos;par3&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; e_list = []</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value &gt;= 2:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e_list.append(key)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if not e_list:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if len(e_list) == 2 and unordered_dice[e_list[0]] == 4:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 2 * (e_list[0] * 2 + e_list[1])</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if len(e_list) == 2 and unordered_dice[e_list[1]] == 4:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 2 * e_list[0] + e_list[1] * 4</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if len(e_list) == 3:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 2 * (e_list[0] + e_list[1] + e_list[2])</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if len(e_list) == 1 and unordered_dice[e_list[0]] == 6:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return e_list[0] * 6</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; if goal == &quot;hus&quot;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; two_list = []</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; three_list = []</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; four_list = []</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value &gt;= 5:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 5 * key</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value == 2:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; two_list.append(key)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value == 3:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; three_list.append(key)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value == 4:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; four_list.append(key)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if four_list and two_list:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return four_list[0] * 3 + two_list[0] * 2</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if three_list:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if len(three_list) == 2:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return max(three_list) * 3 + min(three_list) * 2</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if two_list:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 3 * three_list[0] + two_list[0] * 2</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; if goal == &quot;villa&quot;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; three_list = []</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value == 6:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 6 * key</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value == 3:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; three_list.append(key)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if not three_list:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if len(three_list) == 2:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 3 * (three_list[0] + three_list[1])</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; if goal == &apos;taarn&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; two_list = []</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; four_list = []</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value == 6:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 6 * key</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value == 2:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; two_list.append(key)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value == 4:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; four_list.append(key)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if two_list and four_list:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 2 * two_list[0] + 4 * four_list[0]</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; if goal ==&apos;sjanse&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; x = 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x += key * value</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return x</p>
+      <p>&nbsp; &nbsp; if goal == &apos;full_streight&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value != 1:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return 21</p>
+      <p>&nbsp; &nbsp; if goal == &apos;liten_streight&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if key != 6:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value &lt; 1:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return 15</p>
+      <p>&nbsp; &nbsp; if goal == &apos;stor_streight&apos;:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for key, value in unordered_dice.items():</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if key != 1:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if value &lt; 1:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return 20</p>
+      <p><br></p>
+      <p>def combinations(num_dice):</p>
+      <p>&nbsp; &nbsp; lis = []</p>
+      <p>&nbsp; &nbsp; if num_dice == 6:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for j in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for k in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for l in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for m in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for n in range(1,sider_t +1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i, j, k, l, m, n])</p>
+      <p>&nbsp; &nbsp; if num_dice == 5:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for j in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for k in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for l in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for m in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i, j, k, l, m])</p>
+      <p>&nbsp; &nbsp; if num_dice == 4:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for j in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for k in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for l in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i, j, k, l])</p>
+      <p>&nbsp; &nbsp; if num_dice == 3:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for j in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for k in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i, j, k])</p>
+      <p>&nbsp; &nbsp; if num_dice == 2:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for j in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i, j])</p>
+      <p>&nbsp; &nbsp; if num_dice == 1:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lis.append([i])</p>
+      <p><br></p>
+      <p>&nbsp; &nbsp; ordnet_ant = len(lis)</p>
+      <p>&nbsp; &nbsp; ListOfDicts = []</p>
+      <p>&nbsp; &nbsp; count_list = []</p>
+      <p><br></p>
+      <p>&nbsp; &nbsp; if num_dice == 0:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; return [lis, ListOfDicts, [1]]</p>
+      <p><br></p>
+      <p>&nbsp; &nbsp; counter = 0</p>
+      <p>&nbsp; &nbsp; for item in lis:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; dic = {}</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; for i in range(1, sider_t + 1):</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; dic[i] = item.count(i)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; if dic not in ListOfDicts:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ListOfDicts.append(dic)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; count_list.append(1 / ordnet_ant)</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; counter += 1</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; else:</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; count_list[ListOfDicts.index(dic)] += 1 / ordnet_ant</p>
+      <p><br></p>
+      <p>&nbsp; &nbsp; return [lis, ListOfDicts, count_list]</p>
+      <p># lis er alle de uordnede kombinasjonene &nbsp; &nbsp; (en liste) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; UTFALL</p>
+      <p># ListOfDicts er alle de uordnede kombinasjonene med frekvens i antall &nbsp;(en dict)</p>
+      <p># count_list er alle de uordnede kombinasjonenes sannsynlighet &nbsp; &nbsp; (en liste) ....korresponderer m/lis og ListOfDicts: &nbsp;SANNS</p>
+      <p># &nbsp; dvs. ListOfDicts key er count_list&apos;s indexnr og lis&apos;s indexnr...</p>
+      <p><br></p>
+      <p><br></p>
+      <p>combos = \</p>
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; [combinations(0), combinations(1), combinations(2), combinations(3), combinations(4), combinations(5), combinations(6)]</p>
+      <p><br></p>
+      <p><br></p>
+      <p>KEEP = [</p>
+      <p>&nbsp; &nbsp; [keep(0,5), keep(1,5), keep(2,5), keep(3,5), keep(4,5), keep(5,5)],</p>
+      <p>&nbsp; &nbsp; [keep(0,6), keep(1,6), keep(2,6), keep(3,6), keep(4,6), keep(5,6), keep(6,6)]</p>
+      <p>]</p>
+      <p>#print(&apos;TheLoop:&apos;, theLoop(5, [6,6,6,5,5], &apos;hus&apos;, combos, 1))</p>
+      <p><br></p>
+      <p>with open(&apos;artificial/static/Bilder/simul_5_Normal.txt&apos;) as file:</p>
+      <p>&nbsp; &nbsp; read5 = file.read()</p>
+      <p>SIM_5 = json.loads(read5)</p>
+      <p><br></p>
+      <p>with open(&apos;artificial/static/Bilder/simul_6_Maxi.txt&apos;) as file:</p>
+      <p>&nbsp; &nbsp; read6 = file.read()</p>
+      <p>SIM_6 = json.loads(read6)</p>
+      <p><br></p>
+
+      </div>
+    </div>
+
+
+    <div id="hiddenMsgCount">{{countMsg}}</div>
+    <div id="hiddenUsername" style="display:none;">{{username}}</div>
+    <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+  </body>
+</html>

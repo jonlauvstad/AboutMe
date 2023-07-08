@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hjem</title>
+    <script src="/toNewIndex.js"></script>
+    <script src="/toAll.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        document.getElementById('navDiv').innerHTML = nav();
+        username();
+        admin();
+        unread();
+      });
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404">
+</head>
+<body id="newIndexBody">
+  <div id="navDiv"></div>
+  <div style="text-align:center; margin:auto; width:60%; background-color:white;padding-bottom:2px;border:1px solid silver;border-radius:5px; margin-top:15px;">
+    <h1 style="margin-top:10px;margin-bottom:5px;color:#990099;">Python FastApi og mye SQL</h1>
+    
+    <div style="text-align:left;padding-left:70px;" id="fastApiDiv">
+      <div>
+        <h3 style="text-align:left;color:#cc6699;margin-bottom:5px;">Hotell</h3>
+        <video width="700" height="394" controls>
+          <source src="https://cdn.glitch.me/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Hotell.mp4?v=1685959240445" type="video/webm">
+          <source src="https://cdn.glitch.me/7af6f737-b2be-4868-8ec6-c1c8262f00aa/Hotell.mp4?v=1685959240445" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>  
+      <div>
+        <h3 style="text-align:left;color:#cc6699;margin-bottom:5px;">Eksamensbooking</h3>
+        <ul style="margin-top:5px;">
+          <li>Matcher lokaler, studenter, kurs og tider for en gitt eksamensperiode</li>
+          <li>Ooops! Har rota med databasen siden appen ble laga - funker ikke lengre 😔</li>
+          <li>Synd, for det var en stor/stygg/vanskelig algoritme</li>
+        </ul>
+      </div>
+        
+      
+    </div>
+  </div>
+  
+  <div id="hiddenMsgCount">{{countMsg}}</div>
+  <div id="hiddenIsLoggedIn" style="display:none;">{{isLoggedIn}}</div>
+  <div id="hiddenUsername" style="display:none;">{{username}}</div>
+  <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+</body>
+</html>

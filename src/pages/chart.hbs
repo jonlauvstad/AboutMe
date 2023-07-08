@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <!--<script src="/toNewIndex.js"></script>-->
+    <script src="/toAll.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        document.getElementById('navDiv').innerHTML = nav();
+        username();
+        admin();
+        unread();
+        
+        var opts = document.getElementById("players").innerHTML.split(",");
+        var vts = document.getElementById("votes").innerHTML.split(",");
+        var vt = [];
+        vts.forEach(elm => vt.push(parseInt(elm)))
+        showChart(opts, vt, "chartCanvas", 24);
+        
+        var optsM = document.getElementById("playersM").innerHTML.split(",");
+        var vtsM = document.getElementById("votesM").innerHTML.split(",");
+        var vtM = [];
+        vtsM.forEach(elm => vtM.push(parseInt(elm)))
+        showChart(optsM, vtM, "menCanvas", 12);
+        
+        var optsW = document.getElementById("playersW").innerHTML.split(",");
+        var vtsW = document.getElementById("votesW").innerHTML.split(",");
+        var vtW = [];
+        vtsW.forEach(elm => vtW.push(parseInt(elm)))
+        showChart(optsW, vtW, "womenCanvas", 12);
+        
+        var optsH = document.getElementById("playersH").innerHTML.split(",");
+        var vtsH = document.getElementById("votesH").innerHTML.split(",");
+        var vtH = [];
+        vtsH.forEach(elm => vtH.push(parseInt(elm)))
+        showChart(optsH, vtH, "henCanvas", 12);
+      });
+      
+      var options = ["Messi", "Pele", "Maradona"];
+      var votes = [15, 5, 10];
+      
+      function showChart(choices, picks, canvasId, fontSize){
+        var ctx = document.getElementById(canvasId);
+        var colors = ["#05DA84", "#E6E656", "#E5AED6"];
+        var border = "#ffffff";
+        
+        var myLineChart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: choices,
+          datasets: [{
+            data: picks,
+            backgroundColor: colors,
+            borderColor: border,
+            fill: true,
+            hoverOffset: 12,
+            cutout: "60%"
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: true,
+              position: "bottom",
+              labels: {
+                padding: 24,
+                font: {
+                  size:fontSize
+                }
+              }
+            }
+          },
+          layout: {
+            padding: 24
+          }
+        }
+      });
+      }
+      
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404">
+</head>
+<body>
+  <div id="navDiv"></div>
+  
+  <div style="width:40%; text-align:center; display:inline-block; vertical-align:top;"> <!-- text-align:center; margin:auto; -->
+    <h1>{{football}}{{tennis}}{{asshole}}</h1>
+    
+    <canvas id="chartCanvas"></canvas>
+    
+  </div>
+  
+  <div style="display:inline-block; width:59%">
+    <div style="width:34%; text-align:center; display:inline-grid; vertical-align:top;">
+      <h3 style="margin-bottom:0px;">Menn</h3>
+      <canvas id="menCanvas"></canvas>
+    </div>
+
+    <div style="width:34%; text-align:center; display:inline-grid; vertical-align:top;">
+      <h3 style="margin-bottom:0px;">Kvinner</h3>
+      <canvas id="womenCanvas"></canvas>
+    </div>
+
+    <div style="width:34%; text-align:center; vertical-align:top; display:inline-grid;">
+      <h3 style="margin-bottom:0px;">Hen</h3>
+      <canvas id="henCanvas"></canvas>
+    </div>    
+    
+    <div style="width:34%; text-align:center; vertical-align:middle; display:inline-grid;">
+      <h3>Antall avlagte stemmer:</h3>
+      <h2>{{numVotes}}</h2>
+    </div>
+  </div>
+  
+  
+  <div id="players" style="display:none;">{{players}}</div><div id="votes" style="display:none;">{{votes}}</div>
+  <div id="playersM" style="display:none;">{{playersM}}</div><div id="votesM" style="display:none;">{{votesM}}</div>
+  <div id="playersW" style="display:none;">{{playersW}}</div><div id="votesW" style="display:none;">{{votesW}}</div>
+  <div id="playersH" style="display:none;">{{playersH}}</div><div id="votesH" style="display:none;">{{votesH}}</div>
+  
+  <div id="hiddenMsgCount">{{countMsg}}</div>
+  <div id="hiddenUsername" style="display:none;">{{username}}</div>
+  <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+</body>
+</html>

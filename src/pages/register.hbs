@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrering</title>
+  <script src="/toAll.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('navDiv').innerHTML = nav();
+      username();
+    });
+  </script>
+  <link rel="stylesheet" href="/myStyle.css" />
+  <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404">
+</head>
+<body>
+  <div id="navDiv"></div>
+  <h2>Registrering</h2>
+  <div style="display:inline-block;">
+    <form action="/register" method="post">  
+    <table>
+      <tr>
+        <td>Brukernavn:</td>
+        <td><input name="username" required placeholder="Unikt brukernavn*"></td>
+      </tr>
+      <tr>
+        <td>Passord:</td><td><input name="password" type="password" placeholder="Passord*" required></td>
+      </tr>
+      <tr>
+        <td>Bekreft passord:</td><td><input name="confirmation" type="password" placeholder="Passord (igjen)*" required></td>
+      </tr>
+      <tr>
+        <td>Fornavn:</td><td><input name="fornavn" placeholder="Fornavn"></td>
+      </tr>
+      <tr>
+        <td>Etternavn:</td><td><input name="etternavn" placeholder="Etternavn"></td>
+      </tr>
+      <tr>
+        <td>Email:</td><td><input name="email" placeholder="Email"></td>
+      </tr>
+      <tr>
+        <td>Kjønn:</td>
+        <td>
+          <input type="radio" name="sex" value="M" id="mann"><label for="mann">mann</label>
+          <input type="radio" name="sex" value="K" id="kvinne"><label for="kvinne">kvinne</label>
+          <input type="radio" name="sex" value="H" id="hen" checked="true"><label for="hen">hen</label>
+        </td>
+      </tr>
+      <tr>
+        <td style="font-size:x-small;"><sup>*</sup>Obligatorisk felt</td>
+        <td><input type="submit" style="width:100%;" class="button"></td>
+      </tr>
+    </table>
+    </form>
+    <label class="errMsg" style="font-size:smaller;">{{message1}}</label><br>
+    <label class="errMsg" style="font-size:smaller;">{{message2}}</label>
+  </div>
+  
+  <div id="vedRegDiv" style="display:inline-block; vertical-align:top; padding-left:60px;">
+    <h3 style="margin-top:0px;">Ved registrering får du tilgang til å</h3>
+    <li>vite mer om meg som utvikler/programmerer</li>
+    <li>se litt av prosjektene jeg har laget</li>
+    <li>delta i "spennende" avstemninger og se resultatet</li>
+    <li>+ +</li>
+    <br>...men mest er nok registreringen/login for å demonstrere litt backend:
+    <br>alt gjøres uten noe login/session-library ala Djangos, og alle queries er skrevet i native sql.
+  </div>
+  
+  <div id="hiddenUsername" style="display:none;"></div>
+</body>
+</html>

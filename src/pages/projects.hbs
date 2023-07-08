@@ -1,0 +1,74 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prosjekter</title>
+    <script src="/toAll.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('navDiv').innerHTML = nav(); username(); admin(); unread();
+      });
+    </script>
+    <link rel="stylesheet" href="/myStyle.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404"
+    />
+
+  </head>
+  <body style="background-color:#f9ecf2">
+    <div id="navDiv"></div>
+
+    <div style="text-align:center; margin:auto; width:56%; background-color:#FDFDB9;border-radius:5px;border:1px solid grey;margin-top:15px;">
+      <h1 style="color:#990099;">Prosjekter<sup>*</sup></h1>
+      <div style="text-align:left;">
+        
+        <ul style="list-style-type:none;">
+          <li><h3 style="margin-bottom:10px;"><a href="/ai">AI</a></h3>
+            <ul>
+              <li class="projectLI">Har bare tatt én forelesning, men allikevel mine kuleste prosjekter</li>
+              <li class="projectLI">Tic-tac-toe, Yatzy, Fem-på-rad</li>
+            </ul>
+          </li>
+          <li><h3 style="margin-bottom:10px;"><a href="/cs50web">CS50 Web: Python/Django/JavaScript</a></h3>
+            <ul>
+              <li class="projectLI">Alle prosjeketene må dokumenteres med Youtube-video...</li>
+              <li class="projectLI">Stålsett deg for svært kleine norskengelsk-videoer!</li>
+            </ul>
+          </li>
+          <li><h3 style="margin-bottom:10px;"><a href="/cs">C# inkl Windows Forms</a></h3>
+            <ul>
+              <li class="projectLI">Med inspirasjon fra Backendutvikling på Gokstad Akademiet</li>
+              <li class="projectLI">Datahåndtering og kortspill</li>
+            </ul>
+          </li>
+          <li><h3 style="margin-bottom:10px;"><a href="/fastApi">Annet: Python/FastApi</a></h3>
+            <ul>
+              <li class="projectLI">Bruk av SQL til å løse faktiske oppgaver</li>
+              <li class="projectLI">Hotellbooking og Eksamensplanlegging</li>
+            </ul>
+          </li>
+        </ul>
+        
+      </div>
+      
+    </div>
+
+    <footer style="padding-left:30px; padding-right:30px; font-size:x-small; margin-top:4px;">
+      <div style="display:inline-block; width:2%; vertical-align:top;text-align:right;"><sup>*</sup></div>
+      <div style="display:inline-block; width:90%;">
+        Selv om mange (de fleste?) av prosjektene mine er laget for nettet, er jeg dessverre henvist til å demonstrere dem per
+      video, ettersom det er noe helt annet faktsik å få dem på nett enn å kjøre dem på egen maskin med denne som server. Det krever 
+      bl.a. et domene, og det var først nylig jeg fant ut om Glitch...og all serverkoden min er skrevet i Python (Glitch bruker Node.js og
+        Fastify)...Kan sannsynlivis gjøre noe via Github, så man kan laste ned og kjøre på egen maskin, men er dessverre dårlig på Github, 
+        noe jeg vil gjøre noe med i nærmeste fremtid...
+      </div>
+    </footer>
+    
+    <div id="hiddenMsgCount">{{countMsg}}</div>
+    <div id="hiddenUsername" style="display:none;">{{username}}</div>
+    <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+  </body>
+</html>

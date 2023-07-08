@@ -1,0 +1,142 @@
+.bigDiv{
+  padding-left:30px;
+}
+.navLink{
+  padding-right:30px;
+}
+#meTabDiv{
+  display:inline-block;
+  vertical-align:top;
+}
+#meImg{
+  display:inline-block;
+  margin-right:5px;
+}
+.semiHead{
+  font-weight:bolder;
+  color:darkgreen;
+  padding-top:10px;
+}
+#meTab td{
+  padding-right:10px;
+}
+#dMeg{
+  margin-bottom:10px;
+  margin-top:10px;
+  text-align:center;
+  visibility:hidden;
+}
+#mePrivDiv{
+  display:inline-block;
+  vertical-align:top;
+}
+#glede1, #glede2, #glede3{
+  margin-left:5px;
+  list-style-type:none; 
+}
+.megHjerte{
+  width:120px;
+}
+.megHjerteSiste{
+  width:100px;
+  padding-left:10px;
+}
+.megHjerteSiste li{
+  list-style-type:"-";
+}
+.gledeMainLi{
+  margin-top:10px;
+}
+
+/* ANIMATION: The class: */
+.animateStart{
+  animation-name:showStart;
+  animation-duration:3000ms;
+  animation-fill-mode:forwards;
+  animation-play-state:running;
+}
+
+/* ANIMATION: The animation: */
+@keyframes showStart{
+  from{
+    opacity:0%;
+  }
+  to{
+    opacity:100%;
+  }
+}
+
+#tr1,#tr2,#tr3,#tr4,#tr5,#tr6,#tr7,#tr8,#tr9,#tr10,#tr11,#tr12,#tr13,#tr14,#meImg,
+#elsker,#samboer,#glede,#glede1,#glede2,#glede3,#liker,#interesser{
+  visibility:hidden;
+}
+
+.dear{
+  animation-name:dearStart;
+  animation-duration:3000ms;
+  animation-fill-mode:forwards;
+  animation-play-state:running;
+}
+@keyframes dearStart{
+  from{
+    color:black;
+  }
+  to{
+    
+    color:#ff3300;
+  }
+}
+.dearEnd{
+  animation-name:dearEnd;
+  animation-duration:3000ms;
+  animation-fill-mode:forwards;
+  animation-play-state:running;
+}
+
+@keyframes dearEnd{
+  from{
+    color:#ff3300;
+  }
+  to{
+    color:black;
+  }
+}
+
+.dearB{
+  animation-name:dearStartB;
+  animation-duration:3000ms;
+  animation-fill-mode:forwards;
+  animation-play-state:running;
+}
+.dearEndB{
+  animation-name:dearEndB;
+  animation-duration:3000ms;
+  animation-fill-mode:forwards;
+  animation-play-state:running;
+}
+@keyframes dearStartB{
+  from{
+    color:black;
+  }
+  to{
+    
+    color:#87CEEB;
+  }
+}
+
+@keyframes dearEndB{
+  from{
+    color:#87CEEB;
+  }
+  to{
+    color:black;
+  }
+}
+
+.ikkeEksamen{
+  font-size:smaller;
+}
+
+.navLink{
+  padding-right:30px;
+}

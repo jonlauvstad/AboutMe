@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Tic-Tac-Toe</title>
+        <script src="/toAll.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                document.querySelectorAll("button.field").forEach(function(elm){
+                    elm.addEventListener('click', choose)
+                });
+                document.querySelector('#start').addEventListener('click', start);
+                document.querySelector('#again').addEventListener('click', ()=>location.reload());
+                
+                document.getElementById('navDiv').innerHTML =nav(); username(); admin(); unread();
+            });
+
+            
+            let starter = 'P';
+            const messageD = "PATHETIC!";
+            const messageL = "LOSER!";
+            const messageW ="Not gonna happen!";
+                   
+            //⭕⚔️⛌
+
+            function choose(event){     
+                const dataId = event.target.dataset.id;
+                const elm = document.getElementById(dataId);
+                elm.innerHTML = 'X';
+                elm.className = 'valgt player';
+                     
+                mM();             
+            }
+
+            function start(){
+                starter = 'M';
+                mValue(board());
+            }
+
+            function player(board){
+                let counter = 0;
+                for (var row of board){
+                    for(var cell of row){
+                        if(cell != ''){
+                        counter++;
+                        }
+                    }
+                }
+                if (starter == 'M'){
+                    if(counter % 2 == 0){
+                        return 'O';
+                    }
+                    else{
+                        return 'X';
+                    }
+                }
+                if(counter % 2 == 0){
+                    return 'X';
+                }
+                else{
+                    return 'O';
+                }
+            }
+
+            function board(){     
+                const valgt = document.querySelectorAll("td.valgt");
+                let valgt_ = [['','',''],['','',''],['','','']];
+                for(var item of valgt){
+                    const id = item.id.split(",")
+                    valgt_[id[0]][id[1]] = item.innerHTML;
+                }
+                return valgt_
+            }
+
+            function terminal(theBoard){
+                for(var row of theBoard){
+                    if(row[0] == row[1] && row[1] == row[2] && row[0] != ''){
+                        return row[0];
+                    }
+                }
+                for(var i=0; i< theBoard.length; i++){
+                    if (theBoard[0][i] == theBoard[1][i] && theBoard[1][i] == theBoard[2][i] && theBoard[0][i] != ''){
+                        return theBoard[0][i];
+                    }
+                }
+                if ((theBoard[0][0] == theBoard[1][1] && theBoard[1][1] == theBoard[2][2] && theBoard[1][1] != '') 
+                    || (theBoard[2][0] == theBoard[1][1] && theBoard[1][1] == theBoard[0][2] && theBoard[1][1] != '')){   
+                    return theBoard[1][1];
+                }
+                
+                if(! options(theBoard)){
+                    return "NO WINNER";
+                }
+                return null;   
+            }
+
+            function utility(terminal){ //Ment brukt slik: utility(terminal(board))
+                if (terminal == 'X'){
+                    return 1;
+                }
+                if (terminal == 'O'){
+                    return -1;
+                }   
+                if (terminal == "NO WINNER"){
+                    return 0;
+                }
+                return null;
+            }          
+            
+            
+            function value(board){
+                const is_terminal = terminal(board)
+                if (is_terminal){
+                    return [(utility(is_terminal)), null];          
+                }
+                
+                let the_move;
+
+                let the_value = 2;
+                if (player(board) == 'X'){          
+                    the_value = -2;   
+                    for (var opt of options(board)){
+                        let res = value(move(board, opt)) 
+                        let v = res[0];
+                        if(v >= the_value){
+                            the_value = v;
+                            the_move = opt;
+                            //the_move = res[1];
+                        }
+                    }   
+                    return [the_value, the_move];
+                }
+                for (var opt of options(board)){
+                    let res = value(move(board, opt))
+                    let v = res[0];
+                        if(v <= the_value){
+                            the_value = v;
+                            the_move = opt;
+                            //the_move = res[1];
+                        }
+                }
+                return [the_value, the_move];
+            }
+            
+            
+
+            function mM(){
+                let theBoard = board();
+                console.log(theBoard);
+                let is_decided = terminal(theBoard);
+                let msg = document.querySelector('#msg');
+                let message_ = document.querySelector('#message');
+                if (is_decided){
+                    if (utility(is_decided) == -1){
+                        msg.innerHTML = messageL;
+                        message_.innerHTML = messageL;
+                        finish(utility(is_decided));
+                        return;
+                    }
+                    if (utility(is_decided) == 1){
+                        msg.innerHTML = messageW;
+                        message_.innerHTML = messageW;
+                        finish(utility(is_decided));
+                        return;
+                    }
+                    msg.innerHTML = messageD;
+                    message_.innerHTML = messageD;
+                    finish(0);
+                    return;    
+                }
+                
+                console.log(options(theBoard));
+                let tResult = value(theBoard);
+                tValue = tResult[0];
+                tMove = tResult[1];
+                console.log('tMove:', tMove, 'the_value:', tValue);
+                const mPick = document.getElementById(tMove);
+                mPick.className = 'valgt machine';
+                
+                mPick.innerHTML = 'O';
+                
+                theBoard = board();
+
+                is_decided = terminal(theBoard);
+                if (is_decided){
+                    if (utility(is_decided) == -1){
+                        msg.innerHTML = messageL;
+                        message_.innerHTML = messageL;
+                        finish(utility(is_decided));
+                        return;
+                    }
+                    if (utility(is_decided) == 1){
+                        msg.innerHTML = messageW;
+                        message_.innerHTML = messageW;
+                        finish(utility(is_decided));
+                        return;
+                    }
+                    msg.innerHTML = messageD;
+                    message_.innerHTML = messageD;
+                    finish(0);
+                    return;    
+                }
+            }
+
+            function mValue(board){
+                let pos_moves = options(board);
+                let f_move = pos_moves[Math.floor(Math.random() * pos_moves.length)];
+                const fPick = document.getElementById(f_move);
+
+                fPick.innerHTML = 'O';
+                fPick.className = 'valgt machine';
+            }
+
+            function options(board){
+                opt = [];
+                for(var i=0; i<board.length; i++){
+                    for(var j=0; j<board[i].length; j++){
+                        if (board[i][j] == ''){
+                            opt.push([i,j]);
+                        }
+                    }
+                }
+                if (opt.length > 0){
+                    return opt;
+                }
+                return null;
+                
+            }
+
+            function move(board, coordinate){                
+                var new_board = [];
+                for(var row of board){
+                    let n_row = [];
+                    for (var item of row){
+                        n_row.push(item);
+                    }
+                    new_board.push(n_row);
+                }
+                new_board[coordinate[0]][coordinate[1]] = player(board);
+                return new_board; 
+            }
+
+            function finish(is_decided){
+                document.querySelectorAll("button.field").forEach(function(elm){
+                    elm.disabled = true;
+                });
+                if(is_decided == -1){
+                    //document.querySelector('body').style.backgroundColor = 'red';
+                    setTimeout(function(){
+                        document.querySelector('body').className = 'loser';
+                    }, 1000);
+                    
+                }
+                if(is_decided == 0){
+                    //document.querySelector('body').style.backgroundColor = 'black';
+                    setTimeout(function(){
+                        document.querySelector('body').className = 'pathetic';
+                    }, 1000);
+                    //document.querySelector('body').className = 'pathetic';
+                    document.querySelector('#draw').innerHTML = '(a draw)';
+                }
+                document.querySelector('#hlContainer').style.display = 'none';
+                document.querySelector('#messContainer').style.display = 'block';
+                document.querySelector('#msg').style.display = 'block';
+            }
+
+        </script>
+        <link rel="stylesheet" href="/myStyle.css" />
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href="https://cdn.glitch.global/7af6f737-b2be-4868-8ec6-c1c8262f00aa/favicon.ico?1684740468404"
+        />
+        <style>
+            table{
+                border-collapse: collapse;
+                background-color: white;
+            }
+            table td {
+                border: 1px solid black;
+                margin: none;
+                width: 120px;
+                height: 120px;
+                text-align: center;
+                color:black;
+            }
+            button.field {
+                width: 98%;
+                height: 98%;
+                border: none;
+                background: white;
+            }
+            #again {
+                width:360px; 
+                height:50px; 
+                background: green; 
+                border-radius: 4px;
+                color: yellow;
+            }
+            #msg {
+                text-align: center;
+                font-weight: bolder;
+                font-size: 40px;
+                color:yellow;
+                width: 360px;
+            }
+            #draw {
+                text-align: center;
+                font-size: 12px;
+                color:yellow;
+                width: 360px;
+            }
+           
+            td.valgt {
+                font-size: 32px;
+            }
+            #headline {
+                text-align: center;
+                width: 360px;
+                font-size: 36px;
+            }
+            body{
+                background-color: cornflowerblue;
+                color: white;
+            }
+            #hlContainer {
+                width: 360px;
+                text-align: center  ;
+            }
+            #start {
+                width:360px; 
+                height:50px; 
+                background: lightcyan; 
+                border-radius: 4px;
+                color: darkblue;
+            }
+            #sissy {
+                color: lightcyan;
+                font-size: 20px;
+            }
+            /*td.valgt{
+                animation-name: show;
+                animation-duration: 2s;
+                animation-fill-mode: forwards;
+
+            }*/
+            td.player{
+                animation-name: show;
+                animation-duration: 2s;
+                animation-fill-mode: forwards;
+            }
+            td.machine{
+                animation-name: tell;
+                animation-duration: 4s;
+                animation-fill-mode: forwards;
+                color: red;
+            }
+            @keyframes tell{
+                from{
+                    font-size:0px;
+                    opacity: 0%;
+                }
+                to{
+                    font-size:44px;
+                    opacity: 100%;
+                }
+            }
+            #msg, #message{
+                animation-name: tell;
+                animation-duration: 2s;
+                animation-fill-mode: forwards;
+            }
+            @keyframes show{
+                from{
+                    font-size:10px;
+                }
+                to{
+                    font-size:44px;
+                }
+            }
+            body.loser{
+                animation-name: loser;
+                animation-duration: 3s;
+                animation-fill-mode: forwards;
+            }
+            @keyframes loser{
+                from{
+                    background-color: cornflowerblue;
+                }
+                to{
+                    background-color: red;
+                }
+            }
+            body.pathetic{
+                animation-name: pathetic;
+                animation-duration: 3s;
+                animation-fill-mode: forwards;
+            }
+            @keyframes pathetic{
+                from{
+                    background-color: cornflowerblue;
+                }
+                to{
+                    background-color: black;
+                }
+            }
+        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="navDiv"></div>
+        <div style="width:360px; text-align:center;padding-top:20px;">TIC-TAC-TOE</div>
+        <div id="messContainer" style="display:none; width:360px;">
+            <div id="message" style="width:360px; text-align:center; font-size: 40px; color:yellow; font-weight: bolder;"></div>
+            <div style="text-align:center;"><button id="again">Play again!</button></div>
+        </div>
+        <div id="hlContainer">
+            <div id="headline">Start playing by tapping a square!</div>
+            <div id="sissy" style="text-align:center;">Don't be a sissy - let the Machine start!</div> 
+            <div style="text-align:center;"><button id="start">OK, let's go!</button></div>
+        </div>
+        <div style="width:360px;">
+            <table>
+                <tr>
+                    <td id="0,0"><button class="field" data-id="0,0"></button></td><td id="0,1"><button class="field" data-id="0,1"></button></td><td id="0,2"><button class="field" data-id="0,2"></button></td>
+                </tr>
+                <tr>
+                    <td id="1,0"><button class="field" data-id="1,0"></button></td><td id="1,1"><button class="field" data-id="1,1"></button></td><td id="1,2"><button class="field" data-id="1,2"></button></td>
+                </tr>
+                <tr>
+                    <td id="2,0"><button class="field" data-id="2,0"></button></td><td id="2,1"><button class="field" data-id="2,1"></button></td><td id="2,2"><button class="field" data-id="2,2"></button></td>
+                </tr>
+            </table>
+       </div>
+       <div id="msg" style="display:none"></div>
+       <div id="draw"></div>
+      
+        <div id="hiddenMsgCount">{{countMsg}}</div>
+        <div id="hiddenIsLoggedIn" style="display:none;">{{isLoggedIn}}</div>
+        <div id="hiddenUsername" style="display:none;">{{username}}</div>
+        <div id="hiddenAdm" style="display:none;">{{admin}}</div>
+    
+    </body>
+</html>
